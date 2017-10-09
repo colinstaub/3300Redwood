@@ -3,6 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Documents", "Solution Documents", "{086AA8DF-4965-4FD2-B13A-490F8C96BE6A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Desktop\Junior Year - 20172018\Fall 2017\Data Warehousing and Data Mining\Redwood Solution\BISolutionsWorksheets.xlsx = ..\..\..\..\Desktop\Junior Year - 20172018\Fall 2017\Data Warehousing and Data Mining\Redwood Solution\BISolutionsWorksheets.xlsx
+		..\..\..\..\Desktop\Junior Year - 20172018\Fall 2017\Data Warehousing and Data Mining\Redwood Solution\Information Package.docx = ..\..\..\..\Desktop\Junior Year - 20172018\Fall 2017\Data Warehousing and Data Mining\Redwood Solution\Information Package.docx
+		..\..\..\..\Desktop\Junior Year - 20172018\Fall 2017\Data Warehousing and Data Mining\Redwood Solution\RedwoodStarSchema.vsdx = ..\..\..\..\Desktop\Junior Year - 20172018\Fall 2017\Data Warehousing and Data Mining\Redwood Solution\RedwoodStarSchema.vsdx
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RedwoodDW", "RedwoodDW", "{DA534ABF-3034-4B73-A419-3A3CDE8453DD}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Desktop\Junior Year - 20172018\Fall 2017\Data Warehousing and Data Mining\Redwood Solution\BuildRedwoodDW.sql = ..\..\..\..\Desktop\Junior Year - 20172018\Fall 2017\Data Warehousing and Data Mining\Redwood Solution\BuildRedwoodDW.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
