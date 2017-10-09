@@ -91,26 +91,29 @@ CREATE TABLE DimProperty
 CREATE TABLE DimAgent
 	(Agent_SK	INT IDENTITY (1,1) CONSTRAINT pk_Agents PRIMARY KEY,
 	 Agent_AK	INT NOT NULL,
-	 FirstName	NVARCHAR(30) CONSTRAINT nn_agents_fname NOT NULL,
-	 LastName	NVARCHAR(30) CONSTRAINT nn_agents_lname NOT NULL,
+	 FirstName	NVARCHAR(30) NOT NULL,
+	 LastName	NVARCHAR(30) NOT NULL,
 	 HireDate	DATETIME NOT NULL,
 	 BirthDate	DATETIME NOT NULL,
 	 Gender		NCHAR(1) CONSTRAINT ck_agents_gender CHECK ((Gender = 'M') OR (Gender = 'F'))
 	);
 -- 
-CREATE TABLE FactListings
-	(Agent_SK		INT CONSTRAINT fk_agent_factlistings 
-						FOREIGN KEY REFERENCES DimAgent(Agent_SK),
-	 Property_SK    INT CONSTRAINT fk_property_factlistings 
-						FOREIGN KEY REFERENCES DimProperty(Property_SK),
-	 SaleStatus_SK  INT CONSTRAINT fk_salestatus_factlistings
-					    FOREIGN KEY REFERENCES DimSaleStatus(SaleStatus_SK),
-	 Date_SK	    INT CONSTRAINT fk_date_factlistings
-					    FOREIGN KEY REFERENCES DimDate(Date_SK),
-	 BeginListDate  DATETIME DEFAULT GETDATE(),
-	 EndListDate    DATETIME DEFAULT GETDATE() + 150,
-	 AskingPrice    MONEY,
-	 ActualSalesPrice MONEY
+CREATE TABLE FactListing
+	(Agent_SK INT NOT NULL, 
+	Property_SK INT NOT NULL, 
+	SaleStatus_SK INT NOT NULL, 
+	Date_SK INT NOT NULL, 
+	Time_On_Market INT NOT NULL, 
+	Asking_Price MONEY NOT NULL, 
+	CONSTRAINT pk_FactListing PRIMARY KEY (Agent_SK, Property_SK, SaleStatus_SK, Date_SK),
+	CONSTRAINT fk_FactListing_Agent FOREIGN KEY (Agent_SK)
+        REFERENCES DimAgent(Agent_SK),
+	CONSTRAINT fk_FactListing_Property FOREIGN KEY (Property_SK)
+        REFERENCES DimProperty(Property_SK),
+	CONSTRAINT fk_FactListing_SaleStatus FOREIGN KEY (SaleStatus_SK)
+		REFERENCES DimSaleStatus(SaleStatus_SK),
+	CONSTRAINT fk_FactListing_Date FOREIGN KEY (Date_SK)
+        REFERENCES DimDate(Date_SK)
 	);
 --
 
