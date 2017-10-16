@@ -15,7 +15,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RedwoodDW", "RedwoodDW", "{
 		..\BuildRedwoodDW.sql = ..\BuildRedwoodDW.sql
 	EndProjectSection
 EndProject
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "RedwoodETL", "RedwoodETL\RedwoodETL.dtproj", "{561EB110-7CEF-4756-9B04-08C8F10D1C7D}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{561EB110-7CEF-4756-9B04-08C8F10D1C7D}.Development|Default.ActiveCfg = Development
+		{561EB110-7CEF-4756-9B04-08C8F10D1C7D}.Development|Default.Build.0 = Development
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
