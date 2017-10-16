@@ -1,0 +1,1643 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/16/2017 2:24:09 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-OJ2EE91"
+  DTS:CreatorName="DESKTOP-OJ2EE91\Owner"
+  DTS:DTSID="{117798F0-C8CE-40B7-A0F8-8A14AD92FD00}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.90"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ETLforRedwood"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{ED7EC667-E6DD-49B9-B58F-633FE580FB19}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.Redwood]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4FBF45C0-6343-415D-8863-B222A9C772B6}"
+      DTS:ObjectName="LocalHost.Redwood">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=Redwood;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.RedwoodDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{31763D48-2D1F-430D-9C0E-6CA18A050957}"
+      DTS:ObjectName="LocalHost.RedwoodDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=RedwoodDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Fill Dimension Tables Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{66C537F2-1F09-40F2-963D-9C29D2104382}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Fill Dimension Tables Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{814372D4-0CC0-4935-9F86-9946A208033F}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimAgent"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Agent]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT AgentID, FirstName, LastName, HireDate, BirthDate, Gender 
+FROM Agent</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[LocalHost.Redwood]"
+                      connectionManagerRefId="Package.ConnectionManagers[LocalHost.Redwood]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[AgentID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AgentID]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[AgentID]"
+                          name="AgentID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                          length="30"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                          name="FirstName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                          length="30"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                          name="LastName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[HireDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HireDate]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[HireDate]"
+                          name="HireDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                          name="BirthDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[Gender]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                          length="1"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[Gender]"
+                          name="Gender"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AgentID]"
+                          dataType="i4"
+                          name="AgentID" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                          dataType="wstr"
+                          length="30"
+                          name="FirstName" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                          dataType="wstr"
+                          length="30"
+                          name="LastName" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[HireDate]"
+                          dataType="dbTimeStamp"
+                          name="HireDate" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                          dataType="dbTimeStamp"
+                          name="BirthDate" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                          dataType="wstr"
+                          length="1"
+                          name="Gender" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AgentID]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AgentID]"
+                          name="AgentID" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                          name="FirstName" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                          name="LastName" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HireDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[HireDate]"
+                          name="HireDate" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                          name="BirthDate" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                          dataType="wstr"
+                          length="1"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                          name="Gender" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All"
+                  componentClassID="Microsoft.UnionAll"
+                  contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+                  name="Union All"
+                  version="1">
+                  <inputs>
+                    <input
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Inputs[Union All Input 1]"
+                      name="Union All Input 1">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Inputs[Union All Input 1].Columns[AgentID]"
+                          cachedDataType="i4"
+                          cachedName="AgentID"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[AgentID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[AgentID]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Inputs[Union All Input 1].Columns[FirstName]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="FirstName"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[FirstName]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Inputs[Union All Input 1].Columns[LastName]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="LastName"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[LastName]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Inputs[Union All Input 1].Columns[HireDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="HireDate"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[HireDate]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[HireDate]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Inputs[Union All Input 1].Columns[BirthDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="BirthDate"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[BirthDate]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[BirthDate]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Inputs[Union All Input 1].Columns[Gender]"
+                          cachedDataType="wstr"
+                          cachedLength="1"
+                          cachedName="Gender"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output].Columns[Gender]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[Gender]}</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Inputs[Union All Input 2]"
+                      dangling="true"
+                      hasSideEffects="true"
+                      name="Union All Input 2">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1]"
+                      name="Union All Output 1">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[AgentID]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[AgentID]"
+                          name="AgentID" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[FirstName]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[FirstName]"
+                          name="FirstName" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[LastName]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[LastName]"
+                          name="LastName" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[HireDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[HireDate]"
+                          name="HireDate" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[BirthDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[BirthDate]"
+                          name="BirthDate" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[Gender]"
+                          dataType="wstr"
+                          length="1"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Outputs[Union All Output 1].Columns[Gender]"
+                          name="Gender" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent.Paths[OLE DB Source Output]"
+                  endId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All.Inputs[Union All Input 1]"
+                  name="OLE DB Source Output"
+                  startId="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fill Dimension Tables Sequence Container\Fill DimDate"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{DD4123EF-E72C-4A64-BE8C-6CC8C08B68E5}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimDate"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimDate\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimDate\OLE DB Source.Connections[OleDbConnection]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimDate\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <externalMetadataColumns
+                        isUsed="True" />
+                    </output>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimDate\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimDate\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimDate\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimDate\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimDate\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{91467290-5E44-4485-B424-BDDA4AFE9E92}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimProperty"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT PropertyID, City, State, Zipcode, Bedrooms, Bathrooms, Stories, SqFt, YearBuilt
+FROM Property</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[LocalHost.Redwood]"
+                      connectionManagerRefId="Package.ConnectionManagers[LocalHost.Redwood]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[PropertyID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PropertyID]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[PropertyID]"
+                          name="PropertyID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          length="30"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                          name="City"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                          length="20"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]"
+                          name="State"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[Zipcode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Zipcode]"
+                          length="20"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[Zipcode]"
+                          name="Zipcode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[Bedrooms]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Bedrooms]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[Bedrooms]"
+                          name="Bedrooms"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[Bathrooms]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Bathrooms]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[Bathrooms]"
+                          name="Bathrooms"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[Stories]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Stories]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[Stories]"
+                          name="Stories"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[SqFt]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SqFt]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[SqFt]"
+                          name="SqFt"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[YearBuilt]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[YearBuilt]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[YearBuilt]"
+                          name="YearBuilt"
+                          precision="4"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PropertyID]"
+                          dataType="i4"
+                          name="PropertyID" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                          dataType="wstr"
+                          length="30"
+                          name="City" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                          dataType="wstr"
+                          length="20"
+                          name="State" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Zipcode]"
+                          dataType="wstr"
+                          length="20"
+                          name="Zipcode" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Bedrooms]"
+                          dataType="i4"
+                          name="Bedrooms" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Bathrooms]"
+                          dataType="i4"
+                          name="Bathrooms" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Stories]"
+                          dataType="i4"
+                          name="Stories" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SqFt]"
+                          dataType="i4"
+                          name="SqFt" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[YearBuilt]"
+                          dataType="numeric"
+                          name="YearBuilt"
+                          precision="4" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PropertyID]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PropertyID]"
+                          name="PropertyID" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                          name="City" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State]"
+                          name="State" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Zipcode]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Zipcode]"
+                          name="Zipcode" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Bedrooms]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Bedrooms]"
+                          name="Bedrooms" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Bathrooms]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Bathrooms]"
+                          name="Bathrooms" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Stories]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Stories]"
+                          name="Stories" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SqFt]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SqFt]"
+                          name="SqFt" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[YearBuilt]"
+                          dataType="numeric"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[YearBuilt]"
+                          name="YearBuilt"
+                          precision="4" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All"
+                  componentClassID="Microsoft.UnionAll"
+                  contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+                  name="Union All"
+                  version="1">
+                  <inputs>
+                    <input
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Inputs[Union All Input 1]"
+                      name="Union All Input 1">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Inputs[Union All Input 1].Columns[PropertyID]"
+                          cachedDataType="i4"
+                          cachedName="PropertyID"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[PropertyID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[PropertyID]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Inputs[Union All Input 1].Columns[City]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="City"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[City]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Inputs[Union All Input 1].Columns[State]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="State"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[State]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[State]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Inputs[Union All Input 1].Columns[Zipcode]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="Zipcode"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[Zipcode]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[Zipcode]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Inputs[Union All Input 1].Columns[Bedrooms]"
+                          cachedDataType="i4"
+                          cachedName="Bedrooms"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[Bedrooms]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[Bedrooms]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Inputs[Union All Input 1].Columns[Bathrooms]"
+                          cachedDataType="i4"
+                          cachedName="Bathrooms"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[Bathrooms]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[Bathrooms]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Inputs[Union All Input 1].Columns[Stories]"
+                          cachedDataType="i4"
+                          cachedName="Stories"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[Stories]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[Stories]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Inputs[Union All Input 1].Columns[SqFt]"
+                          cachedDataType="i4"
+                          cachedName="SqFt"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[SqFt]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[SqFt]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Inputs[Union All Input 1].Columns[YearBuilt]"
+                          cachedDataType="numeric"
+                          cachedName="YearBuilt"
+                          cachedPrecision="4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output].Columns[YearBuilt]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[YearBuilt]}</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Inputs[Union All Input 2]"
+                      dangling="true"
+                      hasSideEffects="true"
+                      name="Union All Input 2">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1]"
+                      name="Union All Output 1">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[PropertyID]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[PropertyID]"
+                          name="PropertyID" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[City]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[City]"
+                          name="City" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[State]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[State]"
+                          name="State" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[Zipcode]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[Zipcode]"
+                          name="Zipcode" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[Bedrooms]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[Bedrooms]"
+                          name="Bedrooms" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[Bathrooms]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[Bathrooms]"
+                          name="Bathrooms" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[Stories]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[Stories]"
+                          name="Stories" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[SqFt]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[SqFt]"
+                          name="SqFt" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[YearBuilt]"
+                          dataType="numeric"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Outputs[Union All Output 1].Columns[YearBuilt]"
+                          name="YearBuilt"
+                          precision="4" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty.Paths[OLE DB Source Output]"
+                  endId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All.Inputs[Union All Input 1]"
+                  name="OLE DB Source Output"
+                  startId="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{0E0EAC62-E0E7-43C6-9B42-9AB40C264B27}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Fill DimSaleStatus"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[SaleStatus]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT SaleStatusID, SaleStatus 
+FROM SaleStatus</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[LocalHost.Redwood]"
+                      connectionManagerRefId="Package.ConnectionManagers[LocalHost.Redwood]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Output].Columns[SaleStatusID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SaleStatusID]"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Output].Columns[SaleStatusID]"
+                          name="SaleStatusID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Output].Columns[SaleStatus]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SaleStatus]"
+                          length="10"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Output].Columns[SaleStatus]"
+                          name="SaleStatus"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SaleStatusID]"
+                          dataType="i4"
+                          name="SaleStatusID" />
+                        <externalMetadataColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SaleStatus]"
+                          dataType="wstr"
+                          length="10"
+                          name="SaleStatus" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SaleStatusID]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SaleStatusID]"
+                          name="SaleStatusID" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SaleStatus]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SaleStatus]"
+                          name="SaleStatus" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All"
+                  componentClassID="Microsoft.UnionAll"
+                  contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+                  name="Union All"
+                  version="1">
+                  <inputs>
+                    <input
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All.Inputs[Union All Input 1]"
+                      name="Union All Input 1">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All.Inputs[Union All Input 1].Columns[SaleStatusID]"
+                          cachedDataType="i4"
+                          cachedName="SaleStatusID"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Output].Columns[SaleStatusID]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All.Outputs[Union All Output 1].Columns[SaleStatusID]}</property>
+                          </properties>
+                        </inputColumn>
+                        <inputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All.Inputs[Union All Input 1].Columns[SaleStatus]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="SaleStatus"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Output].Columns[SaleStatus]">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Output column lineage ID"
+                              name="OutputColumnLineageID">#{Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All.Outputs[Union All Output 1].Columns[SaleStatus]}</property>
+                          </properties>
+                        </inputColumn>
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                    <input
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All.Inputs[Union All Input 2]"
+                      dangling="true"
+                      hasSideEffects="true"
+                      name="Union All Input 2">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All.Outputs[Union All Output 1]"
+                      name="Union All Output 1">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All.Outputs[Union All Output 1].Columns[SaleStatusID]"
+                          dataType="i4"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All.Outputs[Union All Output 1].Columns[SaleStatusID]"
+                          name="SaleStatusID" />
+                        <outputColumn
+                          refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All.Outputs[Union All Output 1].Columns[SaleStatus]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All.Outputs[Union All Output 1].Columns[SaleStatus]"
+                          name="SaleStatus" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus.Paths[OLE DB Source Output]"
+                  endId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All.Inputs[Union All Input 1]"
+                  name="OLE DB Source Output"
+                  startId="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{809C39D5-C478-4927-B170-2C20556625FC}"
+          DTS:From="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Fill Dimension Tables Sequence Container\Fill DimAgent" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{6400067D-91E2-482F-91BE-E490C26F243F}"
+          DTS:From="Package\Fill Dimension Tables Sequence Container\Fill DimAgent"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Fill Dimension Tables Sequence Container\Fill DimProperty" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{5C76701C-6511-4B28-824B-690BCB736E77}"
+          DTS:From="Package\Fill Dimension Tables Sequence Container\Fill DimProperty"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Fill Dimension Tables Sequence Container\Fill DimDate" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Prepare ETL Process Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{ED749F63-8E82-4127-9582-A3C9989D287C}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Prepare ETL Process Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Prepare ETL Process Sequence Container\DW Build Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{AEAE0F84-7F64-4EC8-9D5A-62D3C713F1CE}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DW Build Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{31763D48-2D1F-430D-9C0E-6CA18A050957}" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{976AF86E-9482-42B8-96D5-AD28DC76A393}"
+      DTS:From="Package\Prepare ETL Process Sequence Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Fill Dimension Tables Sequence Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Prepare ETL Process Sequence Container\DW Build Execute SQL Task"
+          TopLeft="56,15" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="314,182"
+          Size="314,225"
+          Id="Package\Prepare ETL Process Sequence Container"
+          TopLeft="84,52" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus"
+          TopLeft="27,6" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimAgent"
+          TopLeft="36,96" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimProperty"
+          TopLeft="28,164" />
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimDate"
+          TopLeft="41,249" />
+        <EdgeLayout
+          Id="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="107.5,48">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48"
+              Start="0,0"
+              End="0,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-17.9932421875,15.47314453125,35.986484375,9.5537109375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="105.75,138">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26"
+              Start="0,0"
+              End="0,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-17.9932421875,4.47314453125,35.986484375,9.5537109375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="107,206">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-17.9932421875,12.97314453125,35.986484375,9.5537109375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="375,346"
+          Size="375,389"
+          Id="Package\Fill Dimension Tables Sequence Container"
+          TopLeft="411,58" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="241,52">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="357.5,6"
+              Start="0,0"
+              End="357.5,-1.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-18.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-18.5"
+                    Point2="0,-22.5"
+                    Point3="4,-22.5" />
+                  <mssgle:LineSegment
+                    End="353.5,-22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="353.5,-22.5"
+                    Point2="357.5,-22.5"
+                    Point3="357.5,-18.5" />
+                  <mssgle:LineSegment
+                    End="357.5,-1.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="160.7567578125,-17.5,35.986484375,9.5537109375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source"
+          TopLeft="338,15" />
+        <NodeLayout
+          Size="121,42"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\Union All"
+          TopLeft="355,110" />
+        <EdgeLayout
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus.Paths[OLE DB Source Output]"
+          TopLeft="414.25,57">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53"
+              Start="0,0"
+              End="0,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Fill Dimension Tables Sequence Container\Fill DimAgent">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source"
+          TopLeft="312,15" />
+        <NodeLayout
+          Size="121,42"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\Union All"
+          TopLeft="335,119" />
+        <EdgeLayout
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimAgent.Paths[OLE DB Source Output]"
+          TopLeft="387,57">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.5,62"
+              Start="0,0"
+              End="8.5,54.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27"
+                    Point2="0,31"
+                    Point3="4,31" />
+                  <mssgle:LineSegment
+                    End="4.5,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.5,31"
+                    Point2="8.5,31"
+                    Point3="8.5,35" />
+                  <mssgle:LineSegment
+                    End="8.5,54.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Fill Dimension Tables Sequence Container\Fill DimProperty">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source"
+          TopLeft="305,29" />
+        <NodeLayout
+          Size="121,42"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\Union All"
+          TopLeft="318,125" />
+        <EdgeLayout
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimProperty.Paths[OLE DB Source Output]"
+          TopLeft="379.25,71">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Fill Dimension Tables Sequence Container\Fill DimDate">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Fill Dimension Tables Sequence Container\Fill DimDate\OLE DB Source"
+          TopLeft="318,19" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill Dimension Tables Sequence Container\Fill DimAgent\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Fill Dimension Tables Sequence Container\Fill DimProperty\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
