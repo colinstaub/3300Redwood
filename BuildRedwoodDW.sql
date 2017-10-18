@@ -20,9 +20,9 @@ USE RedwoodDW
 IF EXISTS(
 	SELECT *
 	FROM sys.tables
-	WHERE name = N'FactListing'
+	WHERE name = N'FactListings'
        )
-	DROP TABLE FactListing;
+	DROP TABLE FactListings;
 --
 IF EXISTS(
 	SELECT *
@@ -56,17 +56,39 @@ IF EXISTS(
 -- Create tables
 --
 CREATE TABLE DimDate
-	(Date_SK INT IDENTITY(1,1) CONSTRAINT pk_dimdate PRIMARY KEY,
-	 [Date] DATETIME NOT NULL,
-	 [DateName] NVARCHAR(50) NOT NULL,
-	 [Month] INT NOT NULL,
-	 [MonthName] VARCHAR(9) NOT NULL,
-	 [Quarter] CHAR(2) NOT NULL,
-	 [QuarterName] VARCHAR(9) NOT NULL,
-	 [Year] INT NOT NULL,
-	 [YearName] CHAR(7) NOT NULL,
-	 [Season] VARCHAR(10) NOT NULL,
-	 [Holiday] VARCHAR(50) NOT NULL
+	(	
+	Date_SK INT PRIMARY KEY, 
+	Date DATETIME,
+	FullDate CHAR(10),-- Date in MM-dd-yyyy format
+	DayOfMonth INT, -- Field will hold day number of Month
+	DayName VARCHAR(9), -- Contains name of the day, Sunday, Monday 
+	DayOfWeek INT,-- First Day Sunday=1 and Saturday=7
+	DayOfWeekInMonth INT, -- 1st Monday or 2nd Monday in Month
+	DayOfWeekInYear INT,
+	DayOfQuarter INT,
+	DayOfYear INT,
+	WeekOfMonth INT,-- Week Number of Month 
+	WeekOfQuarter INT, -- Week Number of the Quarter
+	WeekOfYear INT,-- Week Number of the Year
+	Month INT, -- Number of the Month 1 to 12{}
+	MonthName VARCHAR(9),-- January, February etc
+	MonthOfQuarter INT,-- Month Number belongs to Quarter
+	Quarter CHAR(2),
+	QuarterName VARCHAR(9),-- First,Second..
+	Year INT,-- Year value of Date stored in Row
+	YearName CHAR(7), -- CY 2015,CY 2016
+	MonthYear CHAR(10), -- Jan-2016,Feb-2016
+	MMYYYY INT,
+	FirstDayOfMonth DATE,
+	LastDayOfMonth DATE,
+	FirstDayOfQuarter DATE,
+	LastDayOfQuarter DATE,
+	FirstDayOfYear DATE,
+	LastDayOfYear DATE,
+	IsHoliday BIT,-- Flag 1=National Holiday, 0-No National Holiday
+	IsWeekday BIT,-- 0=Week End ,1=Week Day
+	Holiday VARCHAR(50),--Name of Holiday in US
+	Season VARCHAR(10)--Name of Season
 	);
 --
 CREATE TABLE DimSaleStatus
@@ -91,31 +113,26 @@ CREATE TABLE DimProperty
 CREATE TABLE DimAgent
 	(Agent_SK	INT IDENTITY (1,1) CONSTRAINT pk_Agents PRIMARY KEY,
 	 Agent_AK	INT NOT NULL,
-	 FirstName	NVARCHAR(30) NOT NULL,
-	 LastName	NVARCHAR(30) NOT NULL,
+	 FirstName	NVARCHAR(30) CONSTRAINT nn_agents_fname NOT NULL,
+	 LastName	NVARCHAR(30) CONSTRAINT nn_agents_lname NOT NULL,
 	 HireDate	DATETIME NOT NULL,
 	 BirthDate	DATETIME NOT NULL,
 	 Gender		NCHAR(1) CONSTRAINT ck_agents_gender CHECK ((Gender = 'M') OR (Gender = 'F'))
 	);
 -- 
-CREATE TABLE FactListing
-	(Agent_SK INT NOT NULL, 
-	Property_SK INT NOT NULL, 
-	SaleStatus_SK INT NOT NULL, 
-	Date_SK INT NOT NULL, 
-	Time_On_Market INT NOT NULL, 
-	Asking_Price MONEY NOT NULL, 
-	CONSTRAINT pk_FactListing PRIMARY KEY (Agent_SK, Property_SK, SaleStatus_SK, Date_SK),
-	CONSTRAINT fk_FactListing_Agent FOREIGN KEY (Agent_SK)
-        REFERENCES DimAgent(Agent_SK),
-	CONSTRAINT fk_FactListing_Property FOREIGN KEY (Property_SK)
-        REFERENCES DimProperty(Property_SK),
-	CONSTRAINT fk_FactListing_SaleStatus FOREIGN KEY (SaleStatus_SK)
-		REFERENCES DimSaleStatus(SaleStatus_SK),
-	CONSTRAINT fk_FactListing_Date FOREIGN KEY (Date_SK)
-        REFERENCES DimDate(Date_SK)
+CREATE TABLE FactListings
+	(Agent_SK		INT CONSTRAINT fk_agent_factlistings 
+						FOREIGN KEY REFERENCES DimAgent(Agent_SK),
+	 Property_SK    INT CONSTRAINT fk_property_factlistings 
+						FOREIGN KEY REFERENCES DimProperty(Property_SK),
+	 SaleStatus_SK  INT CONSTRAINT fk_salestatus_factlistings
+					    FOREIGN KEY REFERENCES DimSaleStatus(SaleStatus_SK),
+	 Date_SK	    INT CONSTRAINT fk_date_factlistings
+					    FOREIGN KEY REFERENCES DimDate(Date_SK),
+	 Time_On_Market INT,
+	 AskingPrice    MONEY,
+	 ActualSalesPrice MONEY
 	);
--- 
--- 
+--
 
 
