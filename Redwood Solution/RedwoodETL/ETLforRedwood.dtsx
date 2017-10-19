@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="ETLforRedwood"
   DTS:PackageType="5"
-  DTS:VersionBuild="30"
-  DTS:VersionGUID="{43971F87-6B61-4F52-B927-99F332505902}">
+  DTS:VersionBuild="32"
+  DTS:VersionGUID="{C6C25124-0E45-43E1-AD29-769EBCF91F7A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -3519,18 +3519,6 @@ where [refTable].[SaleStatus_AK] = ?</property>
                           externalMetadataColumnId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AskingPrice]"
                           lineageId="Package\Load FactTable\Load FactListings\OLE DB Source.Outputs[OLE DB Source Output].Columns[AskingPrice]" />
                         <inputColumn
-                          refId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PropertyID]"
-                          cachedDataType="i4"
-                          cachedName="PropertyID"
-                          externalMetadataColumnId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Property_SK]"
-                          lineageId="Package\Load FactTable\Load FactListings\OLE DB Source.Outputs[OLE DB Source Output].Columns[PropertyID]" />
-                        <inputColumn
-                          refId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SaleStatusID]"
-                          cachedDataType="i4"
-                          cachedName="SaleStatusID"
-                          externalMetadataColumnId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SaleStatus_SK]"
-                          lineageId="Package\Load FactTable\Load FactListings\OLE DB Source.Outputs[OLE DB Source Output].Columns[SaleStatusID]" />
-                        <inputColumn
                           refId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Date_SK]"
                           cachedDataType="i4"
                           cachedName="Date_SK"
@@ -3549,11 +3537,23 @@ where [refTable].[SaleStatus_AK] = ?</property>
                           externalMetadataColumnId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TimeOnMarket]"
                           lineageId="Package\Load FactTable\Load FactListings\OLE DB Source.Outputs[OLE DB Source Output].Columns[TimeOnMarket]" />
                         <inputColumn
-                          refId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AgentID]"
+                          refId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Agent_SK]"
                           cachedDataType="i4"
-                          cachedName="AgentID"
+                          cachedName="Agent_SK"
                           externalMetadataColumnId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Agent_SK]"
-                          lineageId="Package\Load FactTable\Load FactListings\OLE DB Source.Outputs[OLE DB Source Output].Columns[AgentID]" />
+                          lineageId="Package\Load FactTable\Load FactListings\LKP_Agent_SK.Outputs[Lookup Match Output].Columns[Agent_SK]" />
+                        <inputColumn
+                          refId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Property_SK]"
+                          cachedDataType="i4"
+                          cachedName="Property_SK"
+                          externalMetadataColumnId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Property_SK]"
+                          lineageId="Package\Load FactTable\Load FactListings\LKP_Property_SK.Outputs[Lookup Match Output].Columns[Property_SK]" />
+                        <inputColumn
+                          refId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SaleStatus_SK]"
+                          cachedDataType="i4"
+                          cachedName="SaleStatus_SK"
+                          externalMetadataColumnId="Package\Load FactTable\Load FactListings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SaleStatus_SK]"
+                          lineageId="Package\Load FactTable\Load FactListings\LKP_SaleStatus_SK.Outputs[Lookup Match Output].Columns[SaleStatus_SK]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -3942,7 +3942,7 @@ INNER JOIN Agent
         <NodeLayout
           Size="153.6,41.6"
           Id="Package\Fill Dimension Tables Sequence Container\Fill DimProperty"
-          TopLeft="94.0000011239734,170.729411859083" />
+          TopLeft="90.5714296370138,171.952941288007" />
         <NodeLayout
           Size="163.2,41.6"
           Id="Package\Fill Dimension Tables Sequence Container\Fill DimSaleStatus"
@@ -3950,7 +3950,7 @@ INNER JOIN Agent
         <NodeLayout
           Size="144.8,41.6"
           Id="Package\Fill Dimension Tables Sequence Container\Load DimDate"
-          TopLeft="98.5714314081232,252.894124716788" />
+          TopLeft="99.714288570443,255.341183574636" />
         <EdgeLayout
           Id="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint]"
           TopLeft="166.185715176135,58.6117648603182">
@@ -3977,49 +3977,49 @@ INNER JOIN Agent
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 1]"
-          TopLeft="168.142858098964,130.870588140917">
+          TopLeft="166.428572355485,130.870588140917">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,39.8588237181662"
+              EndConnector="0,41.0823531470906"
               Start="0,0"
-              End="0,32.3588237181662">
+              End="0,33.5823531470906">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.3588237181662" />
+                    End="0,33.5823531470906" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-17.9932421875,11.4025563903331,35.986484375,9.5537109375"
+              BoundingBox="-17.9932421875,12.0143211047953,35.986484375,9.5537109375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Fill Dimension Tables Sequence Container.PrecedenceConstraints[Constraint 2]"
-          TopLeft="170.885716266048,212.329411859083">
+          TopLeft="169.742859103728,213.552941288007">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,40.5647128577055"
+              EndConnector="0,41.7882422866292"
               Start="0,0"
-              End="0,33.0647128577055">
+              End="0,34.2882422866292">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.0647128577055" />
+                    End="0,34.2882422866292" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-17.9932421875,11.7555009601027,35.986484375,9.5537109375"
+              BoundingBox="-17.9932421875,12.3672656745646,35.986484375,9.5537109375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -4633,7 +4633,9 @@ INNER JOIN Agent
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4974,7 +4976,7 @@ INNER JOIN Agent
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -4984,7 +4986,7 @@ INNER JOIN Agent
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -5018,7 +5020,7 @@ INNER JOIN Agent
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -5028,7 +5030,7 @@ INNER JOIN Agent
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
