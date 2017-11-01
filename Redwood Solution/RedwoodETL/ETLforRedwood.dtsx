@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="ETLforRedwood"
   DTS:PackageType="5"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{C6C25124-0E45-43E1-AD29-769EBCF91F7A}">
+  DTS:VersionBuild="33"
+  DTS:VersionGUID="{7FE1692D-2718-4DD8-8B6D-1304A4D7755D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>

@@ -17,6 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RedwoodDW", "RedwoodDW", "{
 EndProject
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "RedwoodETL", "RedwoodETL\RedwoodETL.dtproj", "{561EB110-7CEF-4756-9B04-08C8F10D1C7D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DWAnalysis", "DWAnalysis", "{3098B932-FCE2-4F42-90F5-67382F5CC0A6}"
+	ProjectSection(SolutionItems) = preProject
+		..\PowerPivot_Agent.xlsx = ..\PowerPivot_Agent.xlsx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Default = Development|Default
