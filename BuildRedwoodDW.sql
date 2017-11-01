@@ -20,9 +20,9 @@ USE RedwoodDW
 IF EXISTS(
 	SELECT *
 	FROM sys.tables
-	WHERE name = N'FactListings'
+	WHERE name = N'FactListing'
        )
-	DROP TABLE FactListings;
+	DROP TABLE FactListing;
 --
 IF EXISTS(
 	SELECT *
@@ -117,21 +117,26 @@ CREATE TABLE DimAgent
 	 LastName	NVARCHAR(30) CONSTRAINT nn_agents_lname NOT NULL,
 	 HireDate	DATETIME NOT NULL,
 	 BirthDate	DATETIME NOT NULL,
-	 Gender		NCHAR(1) CONSTRAINT ck_agents_gender CHECK ((Gender = 'M') OR (Gender = 'F'))
+	 Gender		NCHAR(1),
+	 StartDate  DATE NULL,
+	 EndDate	DATE NULL
 	);
 -- 
-CREATE TABLE FactListings
-	(Agent_SK		INT CONSTRAINT fk_agent_factlistings 
+CREATE TABLE FactListing
+	(Agent_SK		INT CONSTRAINT fk_agent_factlisting 
 						FOREIGN KEY REFERENCES DimAgent(Agent_SK),
-	 Property_SK    INT CONSTRAINT fk_property_factlistings 
+	 Property_SK    INT CONSTRAINT fk_property_factlisting 
 						FOREIGN KEY REFERENCES DimProperty(Property_SK),
-	 SaleStatus_SK  INT CONSTRAINT fk_salestatus_factlistings
+	 SaleStatus_SK  INT CONSTRAINT fk_salestatus_factlisting
 					    FOREIGN KEY REFERENCES DimSaleStatus(SaleStatus_SK),
-	 Date_SK	    INT CONSTRAINT fk_date_factlistings
-					    FOREIGN KEY REFERENCES DimDate(Date_SK),
+	 BeginListDateKey INT CONSTRAINT fk_beginlistdate_factlisting
+						FOREIGN KEY REFERENCES DimDate(Date_SK),
+	 EndListDateKey INT CONSTRAINT fk_endlistdate_factlisting
+						FOREIGN KEY REFERENCES DimDate(Date_SK),
+	 CONSTRAINT pk_factlisting PRIMARY KEY (Agent_SK, Property_SK, SaleStatus_SK, 
+											BeginListDateKey),
 	 Time_On_Market INT,
 	 AskingPrice    MONEY,
-	 ActualSalesPrice MONEY
 	);
 --
 
