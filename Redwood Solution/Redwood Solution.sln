@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DWAnalysis", "DWAnalysis", 
 		..\PowerPivot_Agent2.xlsx = ..\PowerPivot_Agent2.xlsx
 	EndProjectSection
 EndProject
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "SSAS_RedwoodDW", "SSAS_RedwoodDW\SSAS_RedwoodDW.dwproj", "{D4221EBE-3420-4A72-B519-9658ADDA1F41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Default = Development|Default
@@ -30,6 +32,9 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{561EB110-7CEF-4756-9B04-08C8F10D1C7D}.Development|Default.ActiveCfg = Development
 		{561EB110-7CEF-4756-9B04-08C8F10D1C7D}.Development|Default.Build.0 = Development
+		{D4221EBE-3420-4A72-B519-9658ADDA1F41}.Development|Default.ActiveCfg = Development
+		{D4221EBE-3420-4A72-B519-9658ADDA1F41}.Development|Default.Build.0 = Development
+		{D4221EBE-3420-4A72-B519-9658ADDA1F41}.Development|Default.Deploy.0 = Development
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
