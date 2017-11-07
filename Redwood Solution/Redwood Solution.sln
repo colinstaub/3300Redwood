@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DWAnalysis", "DWAnalysis", 
 	ProjectSection(SolutionItems) = preProject
 		..\PowerPivot_Agent.xlsx = ..\PowerPivot_Agent.xlsx
 		..\PowerPivot_Agent2.xlsx = ..\PowerPivot_Agent2.xlsx
+		..\DWAnalysis\PropertyTurnover.xlsx = ..\DWAnalysis\PropertyTurnover.xlsx
 	EndProjectSection
 EndProject
 Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "SSAS_RedwoodDW", "SSAS_RedwoodDW\SSAS_RedwoodDW.dwproj", "{D4221EBE-3420-4A72-B519-9658ADDA1F41}"
