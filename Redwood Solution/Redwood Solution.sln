@@ -26,6 +26,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DWAnalysis", "DWAnalysis", 
 EndProject
 Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "SSAS_RedwoodDW", "SSAS_RedwoodDW\SSAS_RedwoodDW.dwproj", "{D4221EBE-3420-4A72-B519-9658ADDA1F41}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PowerBI", "PowerBI", "{E7ABAC6E-1178-427E-9D77-5E6AD267BB88}"
+	ProjectSection(SolutionItems) = preProject
+		..\PowerBI\Redwood_PhaseV_Analysis.pbix = ..\PowerBI\Redwood_PhaseV_Analysis.pbix
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Default = Development|Default
